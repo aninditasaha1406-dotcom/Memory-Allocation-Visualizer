@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Allocation Simulator</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+<h1 class="main-title">Advanced Memory Allocation Dashboard</h1>
+<p class="subtitle">Visual Simulation of First Fit, Best Fit & Worst Fit Algorithms</p>
+
+
+<!-- INPUT SECTION -->
+<div class="card input-card">
+<h2>⚙ Memory Configuration</h2>
+
+<label>Number of Memory Blocks</label>
+<input type="number" id="numBlocks" value="5" title="Enter the number of memory blocks">
+
+<label>Block Sizes (comma separated)</label>
+<input type="text" id="blockSizes" value="100,500,200,300,600" title="Enter block sizes separated by commas">
+
+<label>Number of Processes</label>
+<input type="number" id="numProcesses" value="4" title="Enter the number of processes">
+
+<label>Process Sizes (comma separated)</label>
+<input type="text" id="processSizes" value="212,417,112,426" title="Enter process sizes separated by commas">
+
+
+
+</div>
+
+<!-- BUTTONS -->
+<div class="button-row">
+<button class="btn first" onclick="runFirstFit()">First Fit</button>
+<button class="btn best" onclick="runBestFit()">Best Fit</button>
+<button class="btn worst" onclick="runWorstFit()">Worst Fit</button>
+<button class="btn compare" onclick="runCompareAll()">Compare All</button>
+<button class="btn reset" onclick="resetAll()">Reset</button>
+</div>
+
+<!-- MEMORY -->
+<div class="card">
+<h2>💾 Memory Simulation</h2>
+<div id="memoryContainer"></div>
+</div>
+
+<!-- STATISTICS -->
+<div class="card stats">
+<h2>📊 Performance Statistics</h2>
+<div class="stats-grid">
+
+<div class="stat-box allocated">
+<h3 id="allocatedMem">0 KB</h3>
+<p>Total Allocated</p>
+</div>
+
+<div class="stat-box unused">
+<h3 id="unusedMem">0 KB</h3>
+<p>Unused Memory</p>
+</div>
+
+<div class="stat-box fragmentation">
+<h3 id="fragmentation">0%</h3>
+<p>Fragmentation</p>
+</div>
+
+<div class="stat-box execution">
+<h3 id="execTime">0 ms</h3>
+<p>Execution Time</p>
+</div>
+
+</div>
+</div>
+
+<!-- COMPARISON CHART -->
+<div class="card">
+<h2>📈 Algorithm Utilization Comparison</h2>
+<canvas id="comparisonChart"></canvas>
+</div>
+
+<!-- OUTPUT -->
+<div class="card">
+<h2>🖥 Output Console</h2>
+<textarea id="output" readonly title="Simulation output"></textarea>
+</div>
+
+<!-- EXPLANATION -->
+<div class="card explanation">
+<h2>📘 Algorithm Explanation</h2>
+<p id="explanationText">
+Select an algorithm to see detailed explanation.
+</p>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
