@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
+import os
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -7,13 +9,12 @@ CORS(app)
 # -------------------------------------------------
 # HOME ROUTE (CHECK BACKEND STATUS)
 # -------------------------------------------------
-@app.route("/")
-def home():
-    return jsonify({
-        "message": "Flask server running successfully",
-        "status": "Backend is working!"
-    })
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, "../frontend/.dist")
 
+@app.route("/")
+def serve_frontend():
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
 # -------------------------------------------------
 # FIRST FIT ALGORITHM (MATCHES C CODE)
@@ -206,4 +207,5 @@ def api_compare_all():
 # RUN SERVER
 # -------------------------------------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=1000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
