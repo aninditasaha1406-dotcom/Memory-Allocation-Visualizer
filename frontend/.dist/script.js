@@ -138,7 +138,7 @@ function runAlgo(endpoint, title, type) {
     const start = performance.now();
     const input = getInputData();
 
-    fetch(`http://127.0.0.1:5000/${endpoint}`, {
+   fetch(`/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(input),
@@ -178,7 +178,7 @@ function runWorstFit() {
    RUN COMPARISON (UTILIZATION BASED)
 ================================ */
 function runCompareAll() {
-    fetch("http://127.0.0.1:5000/compare", {
+    fetch("/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(getInputData()),
