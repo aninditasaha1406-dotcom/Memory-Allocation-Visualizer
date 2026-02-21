@@ -11,11 +11,21 @@ CORS(app)
 # -------------------------------------------------
 # HOME ROUTE (CHECK BACKEND STATUS)
 # -------------------------------------------------
+# -------------------------------------------------
+# SERVE FRONTEND STATIC FILES
+# -------------------------------------------------
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, "../frontend/.dist")
 
-@app.route("/")
-def serve_frontend():
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    full_path = os.path.join(FRONTEND_DIR, path)
+
+    if path != "" and os.path.exists(full_path):
+        return send_from_directory(FRONTEND_DIR, path)
+
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 # -------------------------------------------------
